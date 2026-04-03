@@ -1,0 +1,10 @@
+[
+{ "ip": "10.0.0.1", "timestamp": "1735689600", "ports": [ {"port": 80, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 64, "service": {"name": "http", "banner": ""}} ] },
+{ "ip": "10.0.0.1", "timestamp": "1735689600", "ports": [ {"port": 443, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 64, "service": {"name": "https", "banner": ""}} ] },
+{ "ip": "10.0.0.2", "timestamp": "1735689601", "ports": [ {"port": 22, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 64, "service": {"name": "ssh", "banner": "SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.6"}} ] },
+{ "ip": "10.0.0.5", "timestamp": "1735689602", "ports": [ {"port": 3389, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 128, "service": {"name": "ms-wbt-server", "banner": ""}} ] },
+{ "ip": "10.0.0.5", "timestamp": "1735689602", "ports": [ {"port": 445, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 128, "service": {"name": "microsoft-ds", "banner": ""}} ] },
+{ "ip": "10.0.0.10", "timestamp": "1735689603", "ports": [ {"port": 6379, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 64, "service": {"name": "redis", "banner": "-NOAUTH Authentication required"}} ] },
+{ "ip": "10.0.0.15", "timestamp": "1735689604", "ports": [ {"port": 27017, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 64, "service": {"name": "mongodb", "banner": ""}} ] },
+{ "ip": "10.0.0.20", "timestamp": "1735689605", "ports": [ {"port": 9200, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 64, "service": {"name": "elasticsearch", "banner": ""}} ] }
+]
