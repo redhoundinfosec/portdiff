@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="social-preview.png" alt="PORTDIFF" width="640">
+</p>
+
 # portdiff
 
 **Compare network scans and detect attack surface changes.**
@@ -306,3 +310,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 MIT — see [LICENSE](LICENSE).
 
 Copyright 2026 Red Hound Information Security LLC.
+---
+
+> **Built by [Red Hound InfoSec](https://redhound.us)** — Penetration testing, attack surface analysis, and security consulting.
+>
+> [Visit redhound.us](https://redhound.us) | [Read the blog](https://redhound.us/blog.html) | [Book a consultation](https://redhound.us/#contact)
