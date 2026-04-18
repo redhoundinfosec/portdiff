@@ -21,6 +21,12 @@ Built for defenders, security teams, pentesters, and compliance teams tracking i
 
 ---
 
+## Authorized Use
+
+portdiff is intended for defensive security testing and infrastructure change monitoring. Only compare scan data from systems you own or have explicit permission to assess.
+
+---
+
 ## Installation
 
 ### Pre-built binaries

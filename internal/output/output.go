@@ -71,6 +71,11 @@ func NewRenderer(opts Options) (*Renderer, io.Closer, error) {
 	var closer io.Closer = io.NopCloser(nil)
 
 	if opts.Output != "" {
+		// Make sure the destination directory exists so users can pass e.g. "reports/diff.json".
+		if err := os.MkdirAll(filepath.Dir(opts.Output), 0o755); err != nil {
+			return nil, nil, fmt.Errorf("creating output directory: %w", err)
+		}
+
 		f, err := os.Create(opts.Output)
 		if err != nil {
 			return nil, nil, fmt.Errorf("creating output file: %w", err)
