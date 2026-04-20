@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_Nothing yet._
+### Fixed
+
+- Auto-format detection now returns `unknown` for empty or whitespace-only input instead of attempting format heuristics.
 
 ---
 

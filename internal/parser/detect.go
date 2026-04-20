@@ -12,6 +12,11 @@ func DetectFormat(data []byte) Format {
 	// Trim leading whitespace for detection
 	trimmed := bytes.TrimSpace(data)
 
+	// Empty input cannot be reliably detected.
+	if len(trimmed) == 0 {
+		return FormatUnknown
+	}
+
 	// Check for XML (nmap -oX)
 	if bytes.HasPrefix(trimmed, []byte("<?xml")) || bytes.Contains(trimmed[:min(512, len(trimmed))], []byte("<nmaprun")) {
 		return FormatNmapXML
