@@ -72,8 +72,12 @@ func NewRenderer(opts Options) (*Renderer, io.Closer, error) {
 
 	if opts.Output != "" {
 		// Make sure the destination directory exists so users can pass e.g. "reports/diff.json".
-		if err := os.MkdirAll(filepath.Dir(opts.Output), 0o755); err != nil {
-			return nil, nil, fmt.Errorf("creating output directory: %w", err)
+		// If the output is a simple filename (no directory component), filepath.Dir returns ".".
+		// In that case, there's nothing to create.
+		if dir := filepath.Dir(opts.Output); dir != "." {
+			if err := os.MkdirAll(dir, 0o755); err != nil {
+				return nil, nil, fmt.Errorf("creating output directory: %w", err)
+			}
 		}
 
 		f, err := os.Create(opts.Output)
