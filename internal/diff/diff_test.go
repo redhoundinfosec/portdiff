@@ -166,6 +166,46 @@ func TestDiff_NoChanges(t *testing.T) {
 	}
 }
 
+func TestDiff_PortOrdering_IsStableAcrossProtocols(t *testing.T) {
+	baseline := buildScan(map[string][]parser.Port{
+		"192.168.1.1": {openPort(80, parser.TCP, "http", "", "")},
+	})
+	current := buildScan(map[string][]parser.Port{
+		"192.168.1.1": {
+			openPort(80, parser.TCP, "http", "", ""),
+			openPort(80, parser.UDP, "domain", "", ""),
+		},
+	})
+
+	result := Diff(baseline, current, Options{})
+	if len(result.HostDiffs) != 1 {
+		t.Fatalf("expected exactly 1 host diff, got %d", len(result.HostDiffs))
+	}
+	if result.HostDiffs[0].Kind != KindChangedHost {
+		t.Fatalf("expected KindChangedHost, got %s", result.HostDiffs[0].Kind)
+	}
+
+	changes := result.HostDiffs[0].PortChanges
+	if len(changes) == 0 {
+		t.Fatalf("expected at least one port change")
+	}
+
+	// Ordering should be stable: the two 80/* entries should always be ordered by protocol.
+	// We rely on lexicographic ordering of protocol strings ("tcp" before "udp").
+	found80 := []string{}
+	for _, pc := range changes {
+		if pc.Port.Number == 80 {
+			found80 = append(found80, string(pc.Port.Protocol))
+		}
+	}
+	if len(found80) != 2 {
+		t.Fatalf("expected 2 changes for port 80, got %d", len(found80))
+	}
+	if found80[0] != string(parser.TCP) || found80[1] != string(parser.UDP) {
+		t.Fatalf("expected 80/tcp then 80/udp ordering, got %v", found80)
+	}
+}
+
 func TestDiff_IgnorePorts(t *testing.T) {
 	baseline := buildScan(map[string][]parser.Port{
 		"192.168.1.1": {openPort(80, parser.TCP, "http", "", "")},

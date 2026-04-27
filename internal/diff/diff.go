@@ -236,16 +236,20 @@ func diffHostPorts(base, curr *parser.Host, opts Options) []PortChange {
 		allKeys[k] = true
 	}
 
-	// Sort for deterministic output
+	// Sort for deterministic output.
+	// Include protocol in the ordering so keys like "80/tcp" and "80/udp" have a stable order.
 	sortedKeys := make([]string, 0, len(allKeys))
 	for k := range allKeys {
 		sortedKeys = append(sortedKeys, k)
 	}
 	sort.Slice(sortedKeys, func(i, j int) bool {
 		var ni, nj int
-		_, _ = parsePortKey(sortedKeys[i], &ni)
-		_, _ = parsePortKey(sortedKeys[j], &nj)
-		return ni < nj
+		pi, _ := parsePortKey(sortedKeys[i], &ni)
+		pj, _ := parsePortKey(sortedKeys[j], &nj)
+		if ni != nj {
+			return ni < nj
+		}
+		return pi < pj
 	})
 
 	for _, key := range sortedKeys {
